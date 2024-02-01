@@ -40,3 +40,11 @@ function addTodo(txt) { // Create
     }
     gTodos.unshift(todo)
 }
+
+function getTotalTodoCount() {
+    return gTodos.length
+}
+
+function getActiveTodoCount() {
+    return gTodos.filter(todo => todo.isDone === false).length
+}

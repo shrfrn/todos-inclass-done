@@ -16,6 +16,15 @@ function renderTodos() {
             <button onclick="onRemoveTodo(event, '${todo.id}')">x</button>
         </li>`)
     elTodos.innerHTML = strHtmls.join('')
+    renderStats()
+}
+
+function renderStats() {
+    const elTotal = document.querySelector('.total-todos')
+    const elActive = document.querySelector('.active-todos')
+
+    elTotal.innerText = getTotalTodoCount()
+    elActive.innerText = getActiveTodoCount()
 }
 
 function onSetFilterBy(elFilterBy) {

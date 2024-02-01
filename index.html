@@ -10,10 +10,10 @@
     <body onload="onInit()">
         <h1>Let's Todo Today</h1>
 
-        <section class="new-todo">
+        <form onsubmit="onAddTodo(event)" class="new-todo">
             <input type="text" placeholder="What todo?">
-            <button onclick="onAddTodo()">Add</button>
-        </section>
+            <button>Add</button>
+        </form>
 
         <ul class="todo-list"></ul>
 

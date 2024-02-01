@@ -27,7 +27,9 @@ function onToggleTodo(todoId) {
     renderTodos()
 }
 
-function onAddTodo() {
+function onAddTodo(ev) {
+    ev.preventDefault()
+    
     const elInput = document.querySelector('.new-todo input')
 
     addTodo(elInput.value)

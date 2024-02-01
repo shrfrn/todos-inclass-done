@@ -6,6 +6,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.filter {
+    padding: 10px;
+    background-color: lightsteelblue;
+}
+
 .todo-list li {
     cursor: pointer;
 }

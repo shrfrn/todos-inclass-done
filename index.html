@@ -10,6 +10,15 @@
     <body onload="onInit()">
         <h1>Let's Todo Today</h1>
 
+        <section class="filter">
+            <span>Filter by:</span>
+            <select onchange="onSetFilterBy(this)">
+                <option value="">All</option>
+                <option value="Done">Done</option>
+                <option value="Active">Active</option>
+            </select>
+        </section>
+
         <form onsubmit="onAddTodo(event)" class="new-todo">
             <input type="text" placeholder="What todo?">
             <button>Add</button>

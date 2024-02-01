@@ -6,8 +6,15 @@ var gTodos = [
     { id: 't103', txt: 'Try this', isDone: false },
 ]
 
-function getTodos() { // List
-    return gTodos
+function getTodos(filterBy) { // List
+    if(!filterBy) return gTodos
+
+    const isDone = (filterBy === 'Done')
+    return gTodos.filter(todo => todo.isDone === isDone)
+
+    // return gTodos.filter(todo => 
+    //     todo.isDone === (filterBy === 'Done') ? true : false)
+
 }
 
 function removeTodo(todoId) {  // Delete

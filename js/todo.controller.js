@@ -1,18 +1,14 @@
 'use strict'
 
-var gTodos = [
-    { id: 't101', txt: 'Do this', isDone: false },
-    { id: 't102', txt: 'Do that', isDone: true },
-    { id: 't103', txt: 'Try this', isDone: false },
-]
-
 function onInit() {
     renderTodos()
 }
 
 function renderTodos() {
     const elTodos = document.querySelector('.todo-list')
-    const strHtmls = gTodos.map(todo => `<li onclick="onToggleTodo('${todo.id}')">
+    const todos = getTodos()
+    
+    const strHtmls = todos.map(todo => `<li onclick="onToggleTodo('${todo.id}')">
             <span class="${todo.isDone ? 'done' : ''}">${todo.txt}</span>
             <button onclick="onRemoveTodo(event, '${todo.id}')">x</button>
         </li>`)
@@ -21,27 +17,21 @@ function renderTodos() {
 
 function onRemoveTodo(ev, todoId) {
     ev.stopPropagation()
-    
-    const idx = gTodos.findIndex(todo => todo.id === todoId)
-    gTodos.splice(idx, 1)
+
+    removeTodo(todoId)
     renderTodos()
 }
 
 function onToggleTodo(todoId) {
-    const todo = gTodos.find(todo => todo.id === todoId)
-    todo.isDone = !todo.isDone
+    toggleTodo(todoId)
     renderTodos()
 }
 
 function onAddTodo() {
     const elInput = document.querySelector('.new-todo input')
-    const todo = {
-        id: 't' + Date.now() % 1000,
-        txt: elInput.value,
-        isDone: false,
-    }
-    gTodos.unshift(todo)
-    
+
+    addTodo(elInput.value)
+
     elInput.value = ''
     renderTodos()
 }

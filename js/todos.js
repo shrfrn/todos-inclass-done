@@ -14,12 +14,14 @@ function renderTodos() {
     const elTodos = document.querySelector('.todo-list')
     const strHtmls = gTodos.map(todo => `<li onclick="onToggleTodo('${todo.id}')">
             <span class="${todo.isDone ? 'done' : ''}">${todo.txt}</span>
-            <button onclick="onRemoveTodo('${todo.id}')">x</button>
+            <button onclick="onRemoveTodo(event, '${todo.id}')">x</button>
         </li>`)
     elTodos.innerHTML = strHtmls.join('')
 }
 
-function onRemoveTodo(todoId) {
+function onRemoveTodo(ev, todoId) {
+    ev.stopPropagation()
+    
     const idx = gTodos.findIndex(todo => todo.id === todoId)
     gTodos.splice(idx, 1)
     renderTodos()

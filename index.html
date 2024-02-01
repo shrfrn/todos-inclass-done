@@ -9,6 +9,26 @@
     </head>
     <body>
         <h1>Let's Todo Today</h1>
+
+        <section class="new-todo">
+            <input type="text" placeholder="What todo?">
+            <button onclick="onAddTodo()">Add</button>
+        </section>
+
+        <ul>
+            <li>
+                <span>Do this</span>
+                <button onclick="onRemoveTodo('t101')">x</button>
+            </li>
+            <li>
+                <span class="done">Do that</span>
+                <button onclick="onRemoveTodo('t101')">x</button>
+            </li>
+            <li>
+                <span>Try this</span>
+                <button onclick="onRemoveTodo('t101')">x</button>
+            </li>
+        </ul>
         <script src="js/todos.js"></script>
     </body>
 </html>

@@ -3,16 +3,41 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 1em);
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.filter {
+.filter, .new-todo {
     padding: 10px;
     background-color: lightsteelblue;
 }
 
+.todo-list {
+    display: flex;
+    flex-direction: column;
+
+    flex-grow: 1;
+
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
 .todo-list li {
+    display: flex;
+    gap: 10px;
+
+    padding: 5px;
     cursor: pointer;
+}
+
+.todo-list li span {
+    flex-grow: 1;
+}
+
+.todo-list li:nth-child(odd) {
+    background-color: lightgray;
 }
 
 .done {
@@ -27,7 +52,7 @@ footer {
     display: flex;
     justify-content: end;
     gap: 10px;
-    
+
     padding: 10px;
     background-color: lightsteelblue;
 }

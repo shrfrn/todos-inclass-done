@@ -18,6 +18,8 @@ function removeTodo(todoId) {
 	// Delete
 	const idx = gTodos.findIndex(todo => todo.id === todoId)
 	gTodos.splice(idx, 1)
+
+    _saveTodos()
 }
 
 function toggleTodo(todoId) {
@@ -25,6 +27,7 @@ function toggleTodo(todoId) {
 	const todo = gTodos.find(todo => todo.id === todoId)
 	todo.isDone = !todo.isDone
 
+    _saveTodos()
 	return todo
 }
 
@@ -38,6 +41,8 @@ function addTodo(txt) {
 	// Create
 	const todo = _createTodo(txt)
 	gTodos.unshift(todo)
+
+    _saveTodos()
 	return todo
 }
 
@@ -52,11 +57,16 @@ function getActiveTodoCount() {
 // Private functions
 
 function _createTodos() {
-    gTodos = [
-        _createTodo('Do this'), 
-        _createTodo('Do that'), 
-        _createTodo('Try this')
-    ]
+    gTodos = loadFromStorage('todoDB')
+    if(!gTodos || gTodos.length === 0){
+
+        gTodos = [
+            _createTodo('Do this'), 
+            _createTodo('Do that'), 
+            _createTodo('Try this')
+        ]
+        _saveTodos()
+    }
 }
 
 function _createTodo(txt) {
@@ -65,4 +75,8 @@ function _createTodo(txt) {
 		txt,
 		isDone: false,
 	}
+}
+
+function _saveTodos() {
+    saveToStorage('todoDB', gTodos)
 }

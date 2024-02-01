@@ -17,11 +17,13 @@
 
         <ul class="todo-list"></ul>
 
-        <form onsubmit="onCloseTodoDetails(event, this)" class="todo-details hidden">
-            <h2>Todo: <span></span></h2>
-            <pre></pre>
-            <button>x</button>
-        </form>
+        <dialog class="todo-details">
+            <form method="dialog">
+                <h2>Todo: <span></span></h2>
+                <pre></pre>
+                <button>x</button>
+            </form>
+        </dialog>
 
         <script src="js/services/todo.service.js"></script>
         <script src="js/todo.controller.js"></script>

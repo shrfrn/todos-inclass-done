@@ -39,12 +39,7 @@ function onReadTodo(todoId) {
     elTxt.innerText = todo.txt
     elPre.innerText = todoStr
 
-    elModal.classList.remove('hidden')
-}
-
-function onCloseTodoDetails(ev, elModal) {
-    ev.preventDefault()
-    elModal.classList.add('hidden')
+    elModal.showModal()
 }
 
 function onAddTodo(ev) {

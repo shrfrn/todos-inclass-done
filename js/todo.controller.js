@@ -10,6 +10,7 @@ function renderTodos() {
     
     const strHtmls = todos.map(todo => `<li onclick="onToggleTodo('${todo.id}')">
             <span class="${todo.isDone ? 'done' : ''}">${todo.txt}</span>
+            <button onclick="onReadTodo('${todo.id}')">Details</button>
             <button onclick="onRemoveTodo(event, '${todo.id}')">x</button>
         </li>`)
     elTodos.innerHTML = strHtmls.join('')
@@ -25,6 +26,25 @@ function onRemoveTodo(ev, todoId) {
 function onToggleTodo(todoId) {
     toggleTodo(todoId)
     renderTodos()
+}
+
+function onReadTodo(todoId) {
+    const elModal = document.querySelector('.todo-details')
+    const elTxt = elModal.querySelector('h2 span')
+    const elPre = elModal.querySelector('pre')
+
+    const todo = readTodo(todoId)
+    const todoStr = JSON.stringify(todo, null, 4)
+    
+    elTxt.innerText = todo.txt
+    elPre.innerText = todoStr
+
+    elModal.classList.remove('hidden')
+}
+
+function onCloseTodoDetails(ev, elModal) {
+    ev.preventDefault()
+    elModal.classList.add('hidden')
 }
 
 function onAddTodo(ev) {

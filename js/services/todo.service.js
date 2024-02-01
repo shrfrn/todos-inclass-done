@@ -6,21 +6,26 @@ var gTodos = [
     { id: 't103', txt: 'Try this', isDone: false },
 ]
 
-function getTodos() {
+function getTodos() { // List
     return gTodos
 }
 
-function removeTodo(todoId) {
+function removeTodo(todoId) {  // Delete
     const idx = gTodos.findIndex(todo => todo.id === todoId)
     gTodos.splice(idx, 1)
 }
 
-function toggleTodo(todoId) {
+function toggleTodo(todoId) { // Update
     const todo = gTodos.find(todo => todo.id === todoId)
     todo.isDone = !todo.isDone
 }
 
-function addTodo(txt) {
+function readTodo(todoId) { // Read
+    const todo = gTodos.find(todo => todo.id === todoId)
+    return todo
+}
+
+function addTodo(txt) { // Create
     const todo = {
         id: 't' + Date.now() % 1000,
         txt,

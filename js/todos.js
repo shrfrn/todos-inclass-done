@@ -12,7 +12,7 @@ function onInit() {
 
 function renderTodos() {
     const elTodos = document.querySelector('.todo-list')
-    const strHtmls = gTodos.map(todo => `<li>
+    const strHtmls = gTodos.map(todo => `<li onclick="onToggleTodo('${todo.id}')">
             <span class="${todo.isDone ? 'done' : ''}">${todo.txt}</span>
             <button onclick="onRemoveTodo('${todo.id}')">x</button>
         </li>`)
@@ -22,6 +22,12 @@ function renderTodos() {
 function onRemoveTodo(todoId) {
     const idx = gTodos.findIndex(todo => todo.id === todoId)
     gTodos.splice(idx, 1)
+    renderTodos()
+}
+
+function onToggleTodo(todoId) {
+    const todo = gTodos.find(todo => todo.id === todoId)
+    todo.isDone = !todo.isDone
     renderTodos()
 }
 

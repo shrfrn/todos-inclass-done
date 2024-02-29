@@ -1,5 +1,120 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
   "title": "Refactor todos to JQuery",
-  "steps": []
+  "steps": [
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Static Event Handler Setup\nThe event handler setup has been moved from the markup to the onInit() function. This is common practice when using JQuery, the aim being to create total seperation between markup and script.",
+      "line": 9
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Using JQuery Selectors with Method Chaning Instead of Varaibles\n\nTry this -\n\n```\n    $('.todo-list').html(strHtmls)\n```\n\nInstead of -\n\n```\n    const todoList = $('.todo-list')\n    todoList.html(strHtmls)\n\n```",
+      "line": 29,
+      "selection": {
+        "start": {
+          "line": 29,
+          "character": 5
+        },
+        "end": {
+          "line": 29,
+          "character": 35
+        }
+      }
+    },
+    {
+      "file": "js/todo.controller.js",
+      "selection": {
+        "start": {
+          "line": 29,
+          "character": 26
+        },
+        "end": {
+          "line": 29,
+          "character": 34
+        }
+      },
+      "description": "## Array Consolidation\n\nNote, that there is no need to consolidate the `strHtmls` array into a string. \nThe `html()` method does this automatically.\n\nWrite this\n\n```\n    $('.todo-list').html(strHtmls)\n```\n\nInstead of\n\n```\n    $('.todo-list').html(strHtmls.join(''))\n```"
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Access to `this` in Event Handlers\n\nJQuery makes the event target accessible in event handlers as `this` ",
+      "line": 41
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## The Getter / Setter convension\n\nJQuery DOM manipulation methods behave as **getters** when they are called without arguments and as **setters** when they are called with arguments.\n\nHere, the `val()` method is invoked as a getter to retrieve an input element's value:\n\n```\n    addTodo($('.new-todo input').val())\n```\n\n\n\n...and here, it is invoked as a setter, to reset that value:\n\n```\n    $('.new-todo input').val('')\n```",
+      "line": 78,
+      "selection": {
+        "start": {
+          "line": 3,
+          "character": 103
+        },
+        "end": {
+          "line": 3,
+          "character": 110
+        }
+      }
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Add Event Handlers to Dynamic Markup\n\nIn the spirit of seperating script from markup, we will want to remove event handler setup in the dynamic markup created in our app. \nAll event handlers have been removed from this block. \nThey are added after appending the dynamic markup to the DOM in `addListeners()`. ",
+      "line": 28,
+      "selection": {
+        "start": {
+          "line": 23,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 1
+        }
+      }
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Access to Data in Event Handlers\n\nSince the event handlers are now registered after rendering the dynamic markup, We need a new mechanism to access the relevant data from inside them. We will use HTML data attributes for this.\n\nHere, the todo ids are embeded in the dynamically rendered markup, using a `data-todo-id` data attribute.",
+      "line": 23,
+      "selection": {
+        "start": {
+          "line": 23,
+          "character": 45
+        },
+        "end": {
+          "line": 23,
+          "character": 70
+        }
+      }
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Using the `data()` Method to Retrieve Data\n\nHere the `data-todo-id` data attribute is being read to access the todo id.",
+      "line": 55
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Using the `closest()` Method\n\nHere, the `closest()` methods is used to access the button's parent `<li>` so that it's `data-todo-id` attribute can be read.",
+      "line": 48
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Access to native DOM elements\n\nWhen we need to access the native DOM element uderlying a JQuery selector, we can do so by referencing the element's index in the array returned by the JQuery selector.",
+      "line": 71
+    },
+    {
+      "file": "js/todo.controller.js",
+      "description": "## Hooking to the `onload` Event of the HTML `<body>`\n\nWe can hook to the onload event by passing a pointer to that handler, to the JQuery `$()` function.",
+      "line": 5,
+      "selection": {
+        "start": {
+          "line": 5,
+          "character": 1
+        },
+        "end": {
+          "line": 5,
+          "character": 10
+        }
+      }
+    }
+  ]
 }

@@ -2,69 +2,79 @@
 
 var gFilterBy = ''
 
+$(onInit)
+
 function onInit() {
+    $('.filter select').on('change', onSetFilterBy)
+    $('.new-todo').on('submit', onAddTodo)
+
     renderTodos()
+}
+
+function addListeners() {
+    $('.todo-list li').on('click', onToggleTodo)
+    $('.btn-details').on('click', onReadTodo)
+    $('.btn-delete').on('click', onRemoveTodo)
 }
 
 function renderTodos() {
-    const elTodos = document.querySelector('.todo-list')
     const todos = getTodos(gFilterBy)
     
-    const strHtmls = todos.map(todo => `<li onclick="onToggleTodo('${todo.id}')">
+    const strHtmls = todos.map(todo => `<li data-todo-id="${todo.id}">
             <span class="${todo.isDone ? 'done' : ''}">${todo.txt}</span>
-            <button onclick="onReadTodo('${todo.id}')">Details</button>
-            <button onclick="onRemoveTodo(event, '${todo.id}')">x</button>
+            <button class="btn-details">Details</button>
+            <button class="btn-delete">x</button>
         </li>`)
-    elTodos.innerHTML = strHtmls.join('')
+
+    $('.todo-list').html(strHtmls)
+
     renderStats()
+    addListeners()
 }
 
 function renderStats() {
-    const elTotal = document.querySelector('.total-todos')
-    const elActive = document.querySelector('.active-todos')
-
-    elTotal.innerText = getTotalTodoCount()
-    elActive.innerText = getActiveTodoCount()
+    $('.total-todos').text(getTotalTodoCount())
+    $('.active-todos').text(getActiveTodoCount())
 }
 
-function onSetFilterBy(elFilterBy) {
-    gFilterBy = elFilterBy.value
+function onSetFilterBy() {
+    gFilterBy = this.value
     renderTodos()
 }
 
-function onRemoveTodo(ev, todoId) {
+function onRemoveTodo(ev) {
     ev.stopPropagation()
+    const todoId = $(this).closest('li').data('todoId')
 
     removeTodo(todoId)
     renderTodos()
 }
 
-function onToggleTodo(todoId) {
+function onToggleTodo() {
+    const todoId = $(this).data('todoId')
+
     toggleTodo(todoId)
     renderTodos()
 }
 
-function onReadTodo(todoId) {
-    const elModal = document.querySelector('.todo-details')
-    const elTxt = elModal.querySelector('h2 span')
-    const elPre = elModal.querySelector('pre')
-
+function onReadTodo(ev) {
+    ev.stopPropagation()
+    const todoId = $(ev.target).closest('li').data('todoId')
+    console.log('todoId: ', todoId)
     const todo = readTodo(todoId)
     const todoStr = JSON.stringify(todo, null, 4)
     
-    elTxt.innerText = todo.txt
-    elPre.innerText = todoStr
+    $('.todo-details h2 span').text(todo.txt)
+    $('.todo-details pre').text(todoStr)
 
-    elModal.showModal()
+    $('.todo-details')[0].showModal()
 }
 
 function onAddTodo(ev) {
     ev.preventDefault()
-    
-    const elInput = document.querySelector('.new-todo input')
 
-    addTodo(elInput.value)
+    addTodo($('.new-todo input').val())
 
-    elInput.value = ''
+    $('.new-todo input').val('')
     renderTodos()
 }

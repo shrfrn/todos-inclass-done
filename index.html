@@ -7,19 +7,19 @@
         <link rel="stylesheet" href="css/todos.css">
         <title>todos</title>
     </head>
-    <body onload="onInit()">
+    <body>
         <h1>Let's Todo Today</h1>
 
         <section class="filter">
             <span>Filter by:</span>
-            <select onchange="onSetFilterBy(this)">
+            <select>
                 <option value="">All</option>
                 <option value="Done">Done</option>
                 <option value="Active">Active</option>
             </select>
         </section>
 
-        <form onsubmit="onAddTodo(event)" class="new-todo">
+        <form class="new-todo">
             <input type="text" placeholder="What todo?">
             <button>Add</button>
         </form>
@@ -41,10 +41,13 @@
             <span class="active-todos"></span>
         </footer>
 
+        <script src="lib/jquery-3.7.1.min.js"></script>
+
         <script src="js/services/util.service.js"></script>
         <script src="js/services/storage.service.js"></script>
         <script src="js/services/todo.service.js"></script>
         <script src="js/todo.controller.js"></script>
+
         <!-- <script src="js/local-storage-demo.js"></script> -->
     </body>
 </html>
